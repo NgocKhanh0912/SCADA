@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<template desc="">
+  <param name="type">
+    <string name="name">Valve_DNP3_TCP</string>
+    <string name="ref">Valve_DNP3_TCP</string>
+    <string name="blank"></string>
+    <string name="wildcard"></string>
+    <string name="parameter-definitions"></string>
+  </param>
+  <input name="equipment" file="equip.dbf" desc="Equipment Database">
+    <field name="NAME" />
+    <field name="CLUSTER" />
+    <field name="TYPE" />
+    <field name="AREA" />
+    <field name="LOCATION" />
+    <field name="COMMENT" />
+    <field name="CUSTOM1" />
+    <field name="CUSTOM2" />
+    <field name="CUSTOM3" />
+    <field name="CUSTOM4" />
+    <field name="CUSTOM5" />
+    <field name="CUSTOM6" />
+    <field name="CUSTOM7" />
+    <field name="CUSTOM8" />
+    <field name="IODEVICE" />
+    <field name="PAGE" />
+    <field name="HELP" />
+    <field name="DEFSTATE" />
+    <field name="SCHEDULED" />
+    <field name="TAGPREFIX" />
+    <field name="PARAM" />
+    <field name="DEVSCHED" />
+    <field name="SCHEDID" />
+    <array name="param_list">{ToProperty('{param}','=',';')}</array>
+  </input>
+  <output name="Element" file="variable.dbf" filter="'{equipment.type}={type.name}'">
+    <field name="NAME" key="true">{equipment.TAGPREFIX}_Open</field>
+    <field name="TYPE">DIGITAL</field>
+    <field name="UNIT">{equipment.IODEVICE}</field>
+    <field name="ADDR">{equipment.IODEVICE}.Valve11-15.{equipment.TAGPREFIX}.Open</field>
+    <field name="CLUSTER" key="true">{equipment.CLUSTER}</field>
+    <field name="EQUIP">{equipment.name}</field>
+    <field name="ITEM">Open</field>
+    <field name="TAGGENLINK" load="true">3e556002-d4f7-4fdd-b4db-1655</field>
+    <field name="LINKED">1</field>
+    <field name="EDITCODE">3938319</field>
+  </output>
+  <output name="Element_1" file="variable.dbf" filter="'{equipment.type}={type.name}'">
+    <field name="NAME" key="true">{equipment.TAGPREFIX}_Close</field>
+    <field name="TYPE">DIGITAL</field>
+    <field name="UNIT">{equipment.IODEVICE}</field>
+    <field name="ADDR">{equipment.IODEVICE}.Valve11-15.{equipment.TAGPREFIX}.Close</field>
+    <field name="CLUSTER" key="true">{equipment.CLUSTER}</field>
+    <field name="EQUIP">{equipment.name}</field>
+    <field name="ITEM">Close</field>
+    <field name="TAGGENLINK" load="true">5105928c-168e-4609-bf83-71a7</field>
+    <field name="LINKED">1</field>
+    <field name="EDITCODE">3938319</field>
+  </output>
+  <output name="Element_2" file="variable.dbf" filter="'{equipment.type}={type.name}'">
+    <field name="NAME" key="true">{equipment.TAGPREFIX}_Valve</field>
+    <field name="TYPE">DIGITAL</field>
+    <field name="UNIT">{equipment.IODEVICE}</field>
+    <field name="ADDR">{equipment.IODEVICE}.Valve11-15.{equipment.TAGPREFIX}.Valve</field>
+    <field name="CLUSTER" key="true">{equipment.CLUSTER}</field>
+    <field name="EQUIP">{equipment.name}</field>
+    <field name="ITEM">Valve</field>
+    <field name="TAGGENLINK" load="true">801e02f2-e10f-45c3-bea3-2d04</field>
+    <field name="LINKED">1</field>
+    <field name="EDITCODE">3938319</field>
+  </output>
+  <output name="Element_3" file="variable.dbf" filter="'{equipment.type}={type.name}'">
+    <field name="NAME" key="true">{equipment.TAGPREFIX}_Flow</field>
+    <field name="TYPE">LONG</field>
+    <field name="UNIT">{equipment.IODEVICE}</field>
+    <field name="ADDR">{equipment.IODEVICE}.Valve11-15.{equipment.TAGPREFIX}.Flow</field>
+    <field name="CLUSTER" key="true">{equipment.CLUSTER}</field>
+    <field name="EQUIP">{equipment.name}</field>
+    <field name="ITEM">Flow</field>
+    <field name="TAGGENLINK" load="true">4ef7e313-8f77-48f7-827e-6eee</field>
+    <field name="LINKED">1</field>
+    <field name="EDITCODE">3938319</field>
+  </output>
+  <output name="Element_4" file="variable.dbf" filter="'{equipment.type}={type.name}'">
+    <field name="NAME" key="true">{equipment.TAGPREFIX}_Power</field>
+    <field name="TYPE">REAL</field>
+    <field name="UNIT">{equipment.IODEVICE}</field>
+    <field name="ADDR">{equipment.IODEVICE}.Valve11-15.{equipment.TAGPREFIX}.Power</field>
+    <field name="CLUSTER" key="true">{equipment.CLUSTER}</field>
+    <field name="EQUIP">{equipment.name}</field>
+    <field name="ITEM">Power</field>
+    <field name="TAGGENLINK" load="true">a8325e1a-4e2e-47d6-a76c-2618</field>
+    <field name="LINKED">1</field>
+    <field name="EDITCODE">3938319</field>
+  </output>
+</template>
