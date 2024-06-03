@@ -1,0 +1,193 @@
+FUNCTION ExcelData_init(STRING filename, STRING data, STRING pos, STRING sheet);
+	INT hChannel;
+	hChannel = DDEhInitiate("EXCEL", "SYSTEM");
+	DDEhExecute(hChannel, "[NEW(1)");
+	DDEhTerminate(hChannel);
+	
+	hChannel = DDEhInitiate("EXCEL", sheet);
+	IF hChannel > -1 THEN
+		DDEhSetMode(hChannel , 2);
+		DDEhWriteLn(hChannel , "", data);
+		DDEhWriteLn(hChannel , pos,"");		
+		DDEhTerminate(hChannel);
+		hChannel = -1;
+	END;
+END
+
+FUNCTION ExcelData_Write(STRING filename, STRING data, STRING pos, STRING sheet);
+	INT hChannel;
+	STRING status;
+	hChannel = DDEhInitiate("EXCEL", "SYSTEM");
+	DDEhExecute(hChannel, "[OPEN(^"C:\Users\Nguyen Hung\Desktop\BTL_KHANH\REPORT\" + filename + ".xlsx^")]");
+	DDEhTerminate(hChannel);
+	hChannel = DDEhInitiate("EXCEL", Sheet);
+	IF hChannel > -1 THEN
+		// set to CSV mode so EXCEL will put each value in a cell
+		DDEhSetMode(hChannel , 2);
+		
+		DDEhWriteLn(hChannel , "", data);
+		DDEhWriteLn(hChannel , pos, "");
+		
+		DDEhTerminate(hChannel);
+		hChannel = -1;
+	END;
+END
+
+	INT row = 2;
+	STRING status;
+	STRING data, pos;
+
+
+FUNCTION Report_Excel()
+	//Init
+	ExcelData_init("Report", "No, Status, Timestamp, Power, Timestamp", "R1C1:R1C7","Motor11");
+	ExcelData_init("Report", "No, Status, Timestamp, Power, Timestamp", "R1C1:R1C7","Motor22");
+	ExcelData_init("Report", "No, Status, Timestamp, Power, Timestamp", "R1C1:R1C7","Motor33");
+	ExcelData_init("Report", "No, Status, Timestamp, Power, Timestamp", "R1C1:R1C7","Motor12");
+	ExcelData_init("Report", "No, Status, Timestamp, Power, Timestamp", "R1C1:R1C7","Motor13");
+	ExcelData_init("Report", "No, Status, Timestamp, Power, Timestamp", "R1C1:R1C7","Motor21");
+	ExcelData_init("Report", "No, Status, Timestamp, Power, Timestamp", "R1C1:R1C7","Motor23");
+	ExcelData_init("Report", "No, Status, Timestamp, PID Power MAX, Timestamp, Level, Timestamp, Flow, Timestamp", "R1C1:R1C9","Tank1");   
+	ExcelData_init("Report", "No, Status, Timestamp, PID Power MAX, Timestamp, Level, Timestamp, Flow, Timestamp", "R1C1:R1C9","Tank2");
+	ExcelData_init("Report", "No, Status, Timestamp, PID Power MAX, Timestamp, Level, Timestamp, Flow, Timestamp", "R1C1:R1C9","Tank3");
+
+	WHILE 1 DO
+		//Motor
+		pos = "R" + IntToStr(row) + "C1:R" + IntToStr(row) + "C6";
+		//Motor 11
+		IF Motor_11_Run THEN
+			status = "ON";
+		ELSE
+			status = "OFF";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Motor_11_Run.field.vt,5) + "," +
+		       RealToStr(Motor_11_Power,4,1) + "," + TimestampToStr(Motor_11_Power.field.vt,5);
+		       		
+		ExcelData_Write("Report", data, pos, "Motor11");
+		
+		//Motor 12
+		IF Motor_12_Run THEN
+			status = "ON";
+		ELSE
+			status = "OFF";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Motor_12_Run.field.vt,5) + "," +
+		       RealToStr(Motor_12_Power,4,1) + "," + TimestampToStr(Motor_12_Power.field.vt,5);
+		       		
+		ExcelData_Write("Report", data, pos, "Motor12");
+		
+		//Motor 13
+		IF Motor_13_Run THEN
+			status = "ON";
+		ELSE
+			status = "OFF";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Motor_13_Run.field.vt,5) + "," +
+		       RealToStr(Motor_13_Power,4,1) + "," + TimestampToStr(Motor_13_Power.field.vt,5);
+		       		
+		ExcelData_Write("Report", data, pos, "Motor13");
+
+		//Motor 21
+		IF Motor_21_Run THEN
+			status = "ON";
+		ELSE
+			status = "OFF";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Motor_21_Run.field.vt,5) + "," +
+		       RealToStr(Motor_21_Power,4,1) + "," + TimestampToStr(Motor_21_Power.field.vt,5);
+		       		
+		ExcelData_Write("Report", data, pos, "Motor21");
+		
+		//Motor 22
+		IF Motor_22_Run THEN
+			status = "ON";
+		ELSE
+			status = "OFF";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Motor_22_Run.field.vt,5) + "," +
+		       RealToStr(Motor_22_Power,4,1) + "," + TimestampToStr(Motor_22_Power.field.vt,5);
+		       		
+		ExcelData_Write("Report", data, pos, "Motor22");
+		
+		//Motor 23
+		IF Motor_23_Run THEN
+			status = "ON";
+		ELSE
+			status = "OFF";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Motor_23_Run.field.vt,5) + "," +
+		       RealToStr(Motor_23_Power,4,1) + "," + TimestampToStr(Motor_23_Power.field.vt,5);
+		       		
+		ExcelData_Write("Report", data, pos, "Motor23");
+		
+		//Motor 33
+		IF Motor_33_Run THEN
+			status = "ON";
+		ELSE
+			status = "OFF";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Motor_33_Run.field.vt,5) + "," +
+		       RealToStr(Motor_33_Power,4,1) + "," + TimestampToStr(Motor_33_Power.field.vt,5);
+		       		
+		ExcelData_Write("Report", data, pos, "Motor33");
+		
+		
+		//Tank
+		pos = "R" + IntToStr(row) + "C1:R" + IntToStr(row) + "C9";
+		
+		//Tank 1
+		IF Tank_1_Run THEN
+			status = "OPEN";
+		ELSE
+			status = "CLOSE";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Tank_1_Run.field.vt,5) + "," +
+			   RealToStr(Tank_1_PID_PowerMax,4,1) + "," + TimestampToStr(Tank_1_PID_PowerMax.field.vt,5) + "," +
+			   RealToStr(Tank_1_Level,6,1) + "," + TimestampToStr(Tank_1_Level.field.vt,5) + "," +
+			   RealToStr(Tank_1_Flow,6,1) + "," + TimestampToStr(Tank_1_Flow.field.vt,5);
+			   
+		ExcelData_Write("Report", data, pos, "Tank1");
+		
+		//Tank 2
+		IF Tank_2_Run THEN
+			status = "OPEN";
+		ELSE
+			status = "CLOSE";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Tank_2_Run.field.vt,5) + "," +
+			   RealToStr(Tank_2_PID_PowerMax,4,1) + "," + TimestampToStr(Tank_2_PID_PowerMax.field.vt,5) + "," +
+			   RealToStr(Tank_2_Level,6,1) + "," + TimestampToStr(Tank_2_Level.field.vt,5) + "," +
+			   RealToStr(Tank_2_Flow,6,1) + "," + TimestampToStr(Tank_2_Flow.field.vt,5);
+			   
+		ExcelData_Write("Report", data, pos, "Tank2");
+		//Tank 3
+		IF Tank_3_Run THEN
+			status = "OPEN";
+		ELSE
+			status = "CLOSE";
+		END
+		data = IntToStr(row-1) + "," + status + "," + TimestampToStr(Tank_3_Run.field.vt,5) + "," +
+			   RealToStr(Tank_3_PID_PowerMax,4,1) + "," + TimestampToStr(Tank_3_PID_PowerMax.field.vt,5) + "," +
+			   RealToStr(Tank_3_Level,6,1) + "," + TimestampToStr(Tank_3_Level.field.vt,5) + "," +
+			   RealToStr(Tank_3_Flow,6,1) + "," + TimestampToStr(Tank_3_Flow.field.vt,5);
+			   
+		ExcelData_Write("Report", data, pos, "Tank3");	
+		
+		
+		row = row + 1;
+		Sleep(10);
+	END
+END
+
+FUNCTION Clear_All()
+	ExcelData_init("Report", "", "R1:R100", "Motor11");
+	ExcelData_init("Report", "", "R1:R100", "Motor12");
+	ExcelData_init("Report", "", "R1:R100", "Motor13");
+	ExcelData_init("Report", "", "R1:R100", "Motor21");
+	ExcelData_init("Report", "", "R1:R100", "Motor22");
+	ExcelData_init("Report", "", "R1:R100", "Motor23");
+	ExcelData_init("Report", "", "R1:R100", "Motor33");
+	ExcelData_init("Report", "", "R1:R100", "Tank1");
+	ExcelData_init("Report", "", "R1:R100", "Tank2");
+	ExcelData_init("Report", "", "R1:R100", "Tank3");
+END

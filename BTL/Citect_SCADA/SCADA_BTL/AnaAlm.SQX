@@ -1,0 +1,6 @@
+0	Tank_1_Level_Alarm	518	Tank_1.Level	Cluster1
+1	Tank_2_Level_Alarm	518	Tank_2.Level	Cluster1
+2	Tank_3_Level_Alarm	518	Tank_3.Level	Cluster1
+3	Tank_2_Flow_Alarm	518	Tank_2.Flow	Cluster1
+4	Tank_3_Flow_Alarm	518	Tank_3.Flow	Cluster1
+5	Tank_1_Flow_Alarm	518	Tank_1.Flow	Cluster1

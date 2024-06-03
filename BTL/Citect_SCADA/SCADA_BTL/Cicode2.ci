@@ -1,0 +1,328 @@
+STRING sSQL;
+INT hSQL = -1;
+FUNCTION Report_DB()
+	INT Flag = 0;
+	STRING status;
+	STRING data;
+	//Motor 1
+	hSQL = SQLConnect("DSN=My SQL Server 1");
+	IF hSQL < 0 THEN
+		Message("Connect error", SQLErrMsg(),48);
+	ELSE
+		//Motor 11
+		IF Motor_11_Run THEN
+			status = "'ON'";
+		ELSE
+			status = "'OFF'";
+		END
+		data = status + ",'" + TimestampToStr(Motor_11_Run.field.vt,5) + "'," +
+			   RealToStr(Motor_11_Power,4,1) + ",'" + TimestampToStr(Motor_11_Power.field.vt,5);
+			   
+		SQLSet(hSQL, "INSERT INTO Motor_11 (Status,Status_ts,Power,Power_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg, 48);
+		END
+		
+		//Motor 12
+		IF Motor_12_Run THEN
+			status = "'ON'";
+		ELSE
+			status = "'OFF'";
+		END
+		data = status + ",'" + TimestampToStr(Motor_12_Run.field.vt,5) + "'," +
+			   RealToStr(Motor_12_Power,4,1) + ",'" + TimestampToStr(Motor_12_Power.field.vt,5);
+			   
+		SQLSet(hSQL, "INSERT INTO Motor_12 (Status,Status_ts,Power,Power_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg, 48);
+		END
+		
+		//Motor 13
+		IF Motor_13_Run THEN
+			status = "'ON'";
+		ELSE
+			status = "'OFF'";
+		END
+		data = status + ",'" + TimestampToStr(Motor_13_Run.field.vt,5) + "'," +
+			   RealToStr(Motor_13_Power,4,1) + ",'" + TimestampToStr(Motor_13_Power.field.vt,5);
+			   
+		SQLSet(hSQL, "INSERT INTO Motor_13 (Status,Status_ts,Power,Power_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg, 48);
+		END
+		
+		//Motor 21
+		IF Motor_21_Run THEN
+			status = "'ON'";
+		ELSE
+			status = "'OFF'";
+		END
+		data = status + ",'" + TimestampToStr(Motor_21_Run.field.vt,5) + "'," +
+			   RealToStr(Motor_21_Power,4,1) + ",'" + TimestampToStr(Motor_21_Power.field.vt,5);
+			   
+		SQLSet(hSQL, "INSERT INTO Motor_21 (Status,Status_ts,Power,Power_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg, 48);
+		END
+		
+		//Motor 22
+		IF Motor_22_Run THEN
+			status = "'ON'";
+		ELSE
+			status = "'OFF'";
+		END
+		data = status + ",'" + TimestampToStr(Motor_22_Run.field.vt,5) + "'," +
+			   RealToStr(Motor_22_Power,4,1) + ",'" + TimestampToStr(Motor_22_Power.field.vt,5);
+			   
+		SQLSet(hSQL, "INSERT INTO Motor_22 (Status,Status_ts,Power,Power_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg, 48);
+		END
+		
+		//Motor 23
+		IF Motor_23_Run THEN
+			status = "'ON'";
+		ELSE
+			status = "'OFF'";
+		END
+		data = status + ",'" + TimestampToStr(Motor_23_Run.field.vt,5) + "'," +
+			   RealToStr(Motor_23_Power,4,1) + ",'" + TimestampToStr(Motor_23_Power.field.vt,5);
+			   
+		SQLSet(hSQL, "INSERT INTO Motor_23 (Status,Status_ts,Power,Power_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg, 48);
+		END
+		
+		//Motor 33
+		IF Motor_33_Run THEN
+			status = "'ON'";
+		ELSE
+			status = "'OFF'";
+		END
+		data = status + ",'" + TimestampToStr(Motor_33_Run.field.vt,5) + "'," +
+			   RealToStr(Motor_33_Power,4,1) + ",'" + TimestampToStr(Motor_33_Power.field.vt,5);
+			   
+		SQLSet(hSQL, "INSERT INTO Motor_33 (Status,Status_ts,Power,Power_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg, 48);
+		END
+		
+		//Tank 1
+		IF Tank_1_Run THEN
+			status = "'OPEN'";
+		ELSE
+			status = "'CLOSE'";
+		END
+		data = status + ",'" + TimestampToStr(Tank_1_Run.field.vt,5) + "'," +
+		       RealToStr(Tank_1_Power,4,1) + ",'" + TimestampToStr(Tank_1_power.field.vt,5) + "'," +
+		       RealToStr(Tank_1_Level,6,1) + ",'" + TimestampToStr(Tank_1_Level.field.vt,5) + "'," +
+		       RealToStr(Tank_1_Flow,6,1) + ",'" + TimestampToStr(Tank_1_Flow.field.vt,5);
+		       
+		SQLSet(hSQL,"INSERT INTO Tank_1 (Status,Status_ts,Power,Power_ts,Level,Level_ts,Flow,Flow_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg,48);
+		END
+		
+		//Tank 2
+		IF Tank_2_Run THEN
+			status = "'OPEN'";
+		ELSE
+			status = "'CLOSE'";
+		END
+		data = status + ",'" + TimestampToStr(Tank_2_Run.field.vt,5) + "'," +
+		       RealToStr(Tank_2_Power,4,1) + ",'" + TimestampToStr(Tank_2_power.field.vt,5) + "'," +
+		       RealToStr(Tank_2_Level,6,1) + ",'" + TimestampToStr(Tank_2_Level.field.vt,5) + "'," +
+		       RealToStr(Tank_2_Flow,6,1) + ",'" + TimestampToStr(Tank_2_Flow.field.vt,5);
+		       
+		SQLSet(hSQL,"INSERT INTO Tank_2 (Status,Status_ts,Power,Power_ts,Level,Level_ts,Flow,Flow_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg,48);
+		END
+
+		//Tank 3
+		IF Tank_3_Run THEN
+			status = "'OPEN'";
+		ELSE
+			status = "'CLOSE'";
+		END
+		data = status + ",'" + TimestampToStr(Tank_3_Run.field.vt,5) + "'," +
+		       RealToStr(Tank_3_Power,4,1) + ",'" + TimestampToStr(Tank_3_power.field.vt,5) + "'," +
+		       RealToStr(Tank_3_Level,6,1) + ",'" + TimestampToStr(Tank_3_Level.field.vt,5) + "'," +
+		       RealToStr(Tank_3_Flow,6,1) + ",'" + TimestampToStr(Tank_3_Flow.field.vt,5);
+		       
+		SQLSet(hSQL,"INSERT INTO Tank_3 (Status,Status_ts,Power,Power_ts,Level,Level_ts,Flow,Flow_ts)VALUES(");
+		SQLAppend(hSQL, data + "')");
+		Flag = SQLExec(hSQL,"");
+		IF Flag <> 0 THEN
+			Message("Status error", SQLErrMsg,48);
+		END
+	END
+	SQLDisconnect(hSQL);
+END
+
+FUNCTION Report_SQL_DATABASE()
+	WHILE 1 DO
+			Report_DB()
+			Sleep(10);
+	END
+END
+
+FUNCTION Clear_All_DB()
+	INT hSQL = -1;
+	INT Flag = 0;
+	//Motor Clear Data
+	hSQL = SQLConnect("DSN=My SQL Server 1");
+	IF hSQL < 0 THEN
+		Message("Connect error", SQLErrMsg(),48);
+	ELSE
+		// Motor_11
+		SQLSet(hSQL, "DELETE FROM Motor_11");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Motor_11 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+		// Motor_12
+		SQLSet(hSQL, "DELETE FROM Motor_12");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Motor_12 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+		// Motor_13
+		SQLSet(hSQL, "DELETE FROM Motor_13");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Motor_13 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+		// Motor_21
+		SQLSet(hSQL, "DELETE FROM Motor_21");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Motor_21 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+		// Motor_22
+		SQLSet(hSQL, "DELETE FROM Motor_22");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Motor_22 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+		// Motor_23
+		SQLSet(hSQL, "DELETE FROM Motor_23");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Motor_23 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+		// Motor_33
+		SQLSet(hSQL, "DELETE FROM Motor_33");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Motor_33 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+		// Tank_1
+		SQLSet(hSQL, "DELETE FROM Tank_1");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Tank_1 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+		// Tank_2
+		SQLSet(hSQL, "DELETE FROM Tank_2");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Tank_2 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+		// Tank_3
+		SQLSet(hSQL, "DELETE FROM Tank_3");
+		Flag = SQLExec(hSQL, "");
+		IF Flag <> 0 THEN
+			Message("Delete error", SQLErrMsg, 48);
+		ELSE
+			// Reset auto_increment counter
+			SQLSet(hSQL, "ALTER TABLE Tank_3 AUTO_INCREMENT = 1");
+			Flag = SQLExec(hSQL, "");
+			IF Flag <> 0 THEN
+				Message("Reset auto_increment error", SQLErrMsg, 48);
+			END
+		END
+	END
+	SQLDisconnect(hSQL);
+END
